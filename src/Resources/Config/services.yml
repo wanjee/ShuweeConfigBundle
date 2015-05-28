@@ -1,0 +1,6 @@
+services:
+    shuwee_config.parameter_admin:
+        class: Wanjee\Shuwee\ConfigBundle\Admin\ParameterAdmin
+        parent: shuwee_admin.admin_abstract
+        tags:
+          -  { name: shuwee.admin, alias: parameter }
