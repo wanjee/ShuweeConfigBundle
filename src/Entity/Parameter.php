@@ -23,19 +23,26 @@ class Parameter implements \Serializable
     private $id;
 
     /**
+     * Administrative name
+     *
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
      */
     private $name;
 
     /**
+     * This maps to available Symfony2 form types
+     * @see http://symfony.com/doc/current/reference/forms/types.html
+     *
      * @ORM\Column(type="string", length=20)
+     * @Assert\Choice(choices = {"text", "textarea", "integer", "number", "date", "datetime", "email", "url"}, message = "Choose a valid type.")
      * @Assert\NotBlank()
      */
     private $type;
 
     /**
-     * @ORM\Column(type="text")
+     * Serialized version of the form displayed value
+     * @ORM\Column(type="text", nullable=true)
      */
     private $value;
 
@@ -102,6 +109,50 @@ class Parameter implements \Serializable
     {
         $this->value = $value;
     }
+
+    /**
+     * "ValueInput" is a fake data that will
+     * @return mixed
+     */
+    public function getValueInput()
+    {
+        $valueInput = unserialize($this->value);
+
+        // if value is set it should already be of the correct type
+        if (!$valueInput) {
+            // Otherwise ensure we have a valid null|default value depending on current type
+            // "text", "textarea", "integer", "number", "date", "datetime", "email", "url"
+            switch ($this->getType()) {
+                case 'integer':
+                case 'number':
+                    $valueInput = null;
+                    break;
+                case 'date':
+                case 'datetime':
+                    $valueInput = new \DateTime();
+                    break;
+
+                case 'text':
+                case 'textarea':
+                case 'email':
+                case 'url':
+                default :
+                    $valueInput = '';
+                    break;
+            }
+        }
+
+        return $valueInput;
+    }
+
+    /**
+     * @param mixed $valueInput
+     */
+    public function setValueInput($valueInput)
+    {
+        $this->value = serialize($valueInput);
+    }
+
 
     /**
      * @see \Serializable::serialize()
