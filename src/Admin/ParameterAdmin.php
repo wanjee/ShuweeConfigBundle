@@ -80,4 +80,12 @@ class ParameterAdmin extends Admin
     {
         return '{0} Parameters|{1} Parameter|]1,Inf] Parameters';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMenuSection()
+    {
+        return 'configuration';
+    }
 }
