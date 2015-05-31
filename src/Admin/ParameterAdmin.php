@@ -1,8 +1,11 @@
 <?php
 namespace Wanjee\Shuwee\ConfigBundle\Admin;
 
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Wanjee\Shuwee\AdminBundle\Admin\Admin;
 use Wanjee\Shuwee\AdminBundle\Datagrid\Datagrid;
+use Wanjee\Shuwee\AdminBundle\Security\Voter\ContentVoter;
 
 /**
  * Class ParameterAdmin
@@ -94,5 +97,41 @@ class ParameterAdmin extends Admin
     public function getMenuSection()
     {
         return 'configuration';
+    }
+
+    /**
+     * Content voter callback.
+     * For a given user, a given attribute (action to take) and a given object
+     * it returns user authorization
+     *
+     * @param UserInterface $user
+     * @param string $attribute
+     * @param mixed $object
+     * @return integer either VoterInterface::ACCESS_GRANTED, VoterInterface::ACCESS_ABSTAIN, or VoterInterface::ACCESS_DENIED
+     */
+    public function hasAccess(UserInterface $user, $action, $object = null)
+    {
+        $grants = array(
+            ContentVoter::LIST_CONTENT => array('ROLE_PARAMETER_ADMIN', 'ROLE_PARAMETER_EDITOR'),
+            ContentVoter::VIEW_CONTENT => array('ROLE_PARAMETER_ADMIN', 'ROLE_PARAMETER_EDITOR'),
+            ContentVoter::CREATE_CONTENT => array('ROLE_PARAMETER_ADMIN'),
+            ContentVoter::UPDATE_CONTENT => array('ROLE_PARAMETER_ADMIN', 'ROLE_PARAMETER_EDITOR'),
+            ContentVoter::DELETE_CONTENT => array('ROLE_PARAMETER_ADMIN'),
+        );
+
+        // get granted roles
+        $granted_roles = array();
+        if (array_key_exists($action, $grants)) {
+            $granted_roles = $grants[$action];
+        }
+
+        // check if user has any of the give roles
+        foreach ($granted_roles as $granted_role) {
+            if ($this->getAuthorizationChecker()->isGranted($granted_role)) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
+        }
+
+        return VoterInterface::ACCESS_DENIED;
     }
 }
