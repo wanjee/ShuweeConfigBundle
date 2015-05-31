@@ -32,6 +32,34 @@ framework:
     translator:      { fallbacks: ["%locale%"] }
 ```
 
+## Security 
+
+2 roles are defined by ShuweeConfigBundle
+
+* ROLE_PARAMETER_EDITOR
+    + List parameters. 
+    + Change parameters values. 
+* ROLE_PARAMETER_ADMIN
+    + Whatever ROLE_PARAMETER_EDITOR can do.
+    + Create new parameters, choose their machine name and type.  
+    + Can delete deprecated parameters.
+
+In order to access admin pages for parameters you will need to configure your user roles accordingly
+
+``` yaml
+security:
+    
+    # ...
+    
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_USER, ROLE_PARAMETER_EDITOR]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_PARAMETER_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+```
+        
 ## Bundle usage
 
-TODO
+This modules relies on [ShuweeAdminBundle](https://github.com/wanjee/ShuweeAdminBundle) to administer parameters.
+User with ROLE_PARAMETER_ADMIN (i.e. the dev or super admin) will have to define the required parameters and their type.
+User with ROLE_PARAMETER_EDITOR (i.e. the webmaster) will have to choose values.
+ 
+ 
