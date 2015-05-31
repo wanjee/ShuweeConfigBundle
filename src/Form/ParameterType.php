@@ -39,6 +39,11 @@ class ParameterType extends AbstractType
             );
 
             $form->add(
+                'machineName',
+                'text'
+            );
+
+            $form->add(
                 'type',
                 'choice',
                 array(

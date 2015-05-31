@@ -46,6 +46,13 @@ class ParameterAdmin extends Admin
                 )
             )
             ->addField(
+                'machineName',
+                'text',
+                array(
+                    'label' => 'Machine name',
+                )
+            )
+            ->addField(
                 'value',
                 'text',
                 array(

@@ -31,6 +31,14 @@ class Parameter implements \Serializable
     private $name;
 
     /**
+     * Machine name
+     *
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     */
+    private $machineName;
+
+    /**
      * This maps to available Symfony2 form types
      * @see http://symfony.com/doc/current/reference/forms/types.html
      *
@@ -76,6 +84,22 @@ class Parameter implements \Serializable
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMachineName()
+    {
+        return $this->machineName;
+    }
+
+    /**
+     * @param mixed $machineName
+     */
+    public function setMachineName($machineName)
+    {
+        $this->machineName = $machineName;
     }
 
     /**
