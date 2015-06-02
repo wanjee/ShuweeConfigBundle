@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="shuwee_parameters")
  * @ORM\Entity()
  */
-class Parameter implements \Serializable
+class Parameter implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -135,7 +135,8 @@ class Parameter implements \Serializable
     }
 
     /**
-     * "ValueInput" is a fake data that will
+     * "ValueInput" is a fake helper data that is used to get raw value.
+     *
      * @return mixed
      */
     public function getValueInput()
@@ -177,24 +178,47 @@ class Parameter implements \Serializable
         $this->value = serialize($valueInput);
     }
 
+    /**
+     * Get Javascript optimised format for value field
+     *
+     * @return mixed Raw value|object to be json encoded
+     */
+    public function getValueJson()
+    {
+        $valueOutput = unserialize($this->value);
+
+        switch ($this->getType()) {
+            case 'date':
+            case 'datetime':
+                if ($valueOutput instanceof \Datetime) {
+                    return $valueOutput->format(\DateTime::ISO8601);
+                }
+                else {
+                    return null;
+                }
+                break;
+            case 'text':
+            case 'textarea':
+            case 'email':
+            case 'url':
+            case 'integer':
+            case 'number':
+            default :
+                return $valueOutput;
+                break;
+        }
+    }
 
     /**
-     * @see \Serializable::serialize()
+     * @return mixed Returns data which can be serialized by json_encode().
      */
-    public function serialize()
+    function jsonSerialize()
     {
-        return serialize(
-            array(
-                $this->id,
-            )
+        return array(
+            'name' => $this->machineName,
+            'type' => $this->type,
+            'value' => $this->getValueJson(),
         );
     }
 
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized)
-    {
-        list ($this->id,) = unserialize($serialized);
-    }
 }
