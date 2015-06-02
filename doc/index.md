@@ -58,6 +58,14 @@ security:
         
 ## Bundle usage
 
+
+Add ShuweeAdminBundle routing in *app/config/routing.yml*
+
+``` yaml
+shuwee_config:
+    resource: "@ShuweeConfigBundle/Resources/config/routing.yml"
+```
+
 This modules relies on [ShuweeAdminBundle](https://github.com/wanjee/ShuweeAdminBundle) to administer parameters.
 User with ROLE_PARAMETER_ADMIN (i.e. the dev or super admin) will have to define the required parameters and their type.
 User with ROLE_PARAMETER_EDITOR (i.e. the webmaster) will have to choose values.
