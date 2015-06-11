@@ -35,12 +35,18 @@ class ParameterType extends AbstractType
         if (!$parameter || null === $parameter->getId()) {
             $form->add(
                 'name',
-                'text'
+                'text',
+                array(
+                    'help' => 'Administrative name.  Only to help editor to complete variables.',
+                )
             );
 
             $form->add(
                 'machineName',
-                'text'
+                'text',
+                array(
+                    'help' => 'Name to be used to retrieve the value using the REST API or the service.  Use a descriptive string like "site.title", "site.subtitle".  Should be as short as possible and unique.',
+                )
             );
 
             $form->add(
@@ -57,25 +63,20 @@ class ParameterType extends AbstractType
                         'datetime' => 'Datetime',
                         'email' => 'Email',
                         'url' => 'URL',
-                    )
+                    ),
+                    'help' => 'This cannot be changed afterwards.  If you need to change type you will have to delete and recreate the variable.'
                 )
             );
         }
         else {
-            // display name as a label
-            $form->add(
-                'name',
-                'text',
-                array(
-                    'disabled' => TRUE
-                )
-            );
 
             // get type and display according field element
             $form->add(
                 'value_input',
                 $parameter->getType(),
                 array(
+                    // display name as a label
+                    'label' => $parameter->getName(),
                     'required' => false,
                 )
             );
