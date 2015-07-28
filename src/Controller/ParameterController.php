@@ -38,6 +38,9 @@ class ParameterController extends Controller
             $response->setCallback($callback);
         }
 
+        $response->setPublic();
+        $response->setMaxAge(300); // 5 minutes
+
         return $response;
     }
 
@@ -72,6 +75,9 @@ class ParameterController extends Controller
         if (!is_null($callback)) {
             $response->setCallback($callback);
         }
+
+        $response->setPublic();
+        $response->setMaxAge(300); // 5 minutes
 
         return $response;
     }
