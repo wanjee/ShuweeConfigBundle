@@ -45,7 +45,7 @@ class ParameterType extends AbstractType
                 'machineName',
                 'text',
                 array(
-                    'help' => 'Name to be used to retrieve the value using the REST API or the service.  Use a descriptive string like "site.title", "site.subtitle".  Should be as short as possible and unique.',
+                    'help' => 'Name to be used to retrieve the value using the REST API or the service.  Use a descriptive string like "site.title", "site.subtitle".  Should be as short as possible and must be unique.',
                 )
             );
 

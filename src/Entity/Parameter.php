@@ -4,6 +4,7 @@ namespace Wanjee\Shuwee\ConfigBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
@@ -12,6 +13,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="shuwee_parameters")
  * @ORM\Entity()
+ *
+ * @UniqueEntity(
+ *   fields={"machineName"},
+ *   message="The machine name must be unique."
+ * )
+ *
  */
 class Parameter implements \JsonSerializable
 {
@@ -33,7 +40,7 @@ class Parameter implements \JsonSerializable
     /**
      * Machine name
      *
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank()
      */
     private $machineName;
