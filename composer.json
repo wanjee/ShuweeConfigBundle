@@ -29,7 +29,7 @@
     "php": ">=5.4",
     "symfony/framework-bundle": "~2.0",
     "twig/twig": "~1.5",
-    "wanjee/shuwee-admin-bundle": "dev-master"
+    "wanjee/shuwee-admin-bundle": "~0.1"
   },
   "require-dev": {
     "phpunit/phpunit": "4.*"
