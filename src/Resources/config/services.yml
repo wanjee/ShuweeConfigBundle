@@ -4,3 +4,8 @@ services:
         parent: shuwee_admin.admin_abstract
         tags:
           -  { name: shuwee.admin, alias: parameter }
+
+
+    shuwee_config:
+        class: Wanjee\Shuwee\ConfigBundle\Utils\ConfigManager
+        arguments: [@doctrine.orm.entity_manager]

@@ -126,6 +126,7 @@ class Parameter implements \JsonSerializable
     }
 
     /**
+     * Get serialized value.
      * @return mixed
      */
     public function getValue()
@@ -134,6 +135,7 @@ class Parameter implements \JsonSerializable
     }
 
     /**
+     * Set serialized value.
      * @param mixed $value
      */
     public function setValue($value)
@@ -142,7 +144,7 @@ class Parameter implements \JsonSerializable
     }
 
     /**
-     * "ValueInput" is a fake helper data that is used to get raw value.
+     * "ValueInput" is a fake field.
      *
      * @return mixed
      */
@@ -173,6 +175,7 @@ class Parameter implements \JsonSerializable
                     break;
             }
         }
+        // if value was
 
         return $valueInput;
     }
