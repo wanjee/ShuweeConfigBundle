@@ -31,21 +31,20 @@ class ParameterAdmin extends Admin
      */
     public function getDatagrid()
     {
-        $datagrid = new Datagrid($this);
+        $datagrid = new Datagrid($this, array(
+                'limit_per_page' => 50,
+                'default_sort_column' => 'machineName',
+                'default_sort_order' => 'asc',
+            )
+        );
 
         $datagrid
-            ->addField(
-                'id',
-                'text',
-                array(
-                    'label' => '#',
-                )
-            )
             ->addField(
                 'name',
                 'text',
                 array(
                     'label' => 'Name',
+                    'sortable' => true,
                 )
             )
             ->addField(
@@ -53,6 +52,7 @@ class ParameterAdmin extends Admin
                 'text',
                 array(
                     'label' => 'Machine name',
+                    'sortable' => true,
                 )
             )
             ->addField(
