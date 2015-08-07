@@ -25,12 +25,10 @@ class ParameterController extends Controller
     public function getParametersAction(Request $request)
     {
         // load all parameters
-        $em = $this->getDoctrine()->getManager();
-
-        $list = $em->getRepository('ShuweeConfigBundle:Parameter')->findAll();
+        $parameters = $this->container->get('shuwee_config.manager')->all();
 
         // Return as associative array to avoid JSON Hijacking
-        $response = new JsonResponse(array('parameters' => $list));
+        $response = new JsonResponse(array('parameters' => $parameters));
 
         // allow JSONP
         $callback = $request->query->get('callback');
@@ -54,21 +52,14 @@ class ParameterController extends Controller
      */
     public function getParameterAction(Request $request, $machineName)
     {
-        // load parameter by machine name
-        $filters = array(
-            'machineName' => $machineName,
-        );
+        $parameterValue = $this->container->get('shuwee_config.manager')->get($machineName);
 
-        $em = $this->getDoctrine()->getManager();
-
-        $parameter = $em->getRepository('ShuweeConfigBundle:Parameter')->findOneBy($filters);
-
-        if (!$parameter) {
+        if (!$parameterValue) {
             throw $this->createNotFoundException();
         }
 
         // Return as associative array to avoid JSON Hijacking
-        $response = new JsonResponse(array('parameter' => $parameter));
+        $response = new JsonResponse(array('value' => $parameterValue));
 
         // allow JSONP
         $callback = $request->query->get('callback');
