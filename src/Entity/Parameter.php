@@ -42,6 +42,7 @@ class Parameter implements \JsonSerializable
      *
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank()
+     * @Assert\Regex("/^[0-9a-zA-Z_]+$/", message = "Machine name can only contain: letters, numbers and underscore ('_') characters.")
      */
     private $machineName;
 
@@ -144,26 +145,26 @@ class Parameter implements \JsonSerializable
     }
 
     /**
-     * "ValueInput" is a fake field.
+     * "CleanValue" is not a mapped field, it is use to get proper "object" whatever the value state.
      *
      * @return mixed
      */
-    public function getValueInput()
+    public function getCleanValue()
     {
-        $valueInput = unserialize($this->value);
+        $cleanValue = unserialize($this->value);
 
         // if value is set it should already be of the correct type
-        if (!$valueInput) {
+        if (!$cleanValue) {
             // Otherwise ensure we have a valid null|default value depending on current type
             // "text", "textarea", "integer", "number", "date", "datetime", "email", "url"
             switch ($this->getType()) {
                 case 'integer':
                 case 'number':
-                    $valueInput = null;
+                    $cleanValue = null;
                     break;
                 case 'date':
                 case 'datetime':
-                    $valueInput = new \DateTime();
+                    $cleanValue = new \DateTime();
                     break;
 
                 case 'text':
@@ -171,21 +172,20 @@ class Parameter implements \JsonSerializable
                 case 'email':
                 case 'url':
                 default :
-                    $valueInput = '';
+                    $cleanValue = '';
                     break;
             }
         }
-        // if value was
 
-        return $valueInput;
+        return $cleanValue;
     }
 
     /**
      * @param mixed $valueInput
      */
-    public function setValueInput($valueInput)
+    public function setCleanValue($cleanValue)
     {
-        $this->value = serialize($valueInput);
+        $this->value = serialize($cleanValue);
     }
 
     /**
