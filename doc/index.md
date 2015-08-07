@@ -73,6 +73,6 @@ shuwee_config:
 ### API 
 
 **/api/parameters** : Get the whole list of parameters
-**/api/parameter/{machineName}** : Get a single parameter by its machine_name
+**/api/parameters/{machineName}** : Get a single parameter by its machine_name
  
  
