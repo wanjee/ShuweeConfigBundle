@@ -7,5 +7,5 @@ services:
 
 
     shuwee_config.manager:
-        class: Wanjee\Shuwee\ConfigBundle\Utils\ConfigManager
+        class: Wanjee\Shuwee\ConfigBundle\Utils\ParameterManager
         arguments: [@doctrine.orm.entity_manager]
