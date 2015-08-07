@@ -6,6 +6,6 @@ services:
           -  { name: shuwee.admin, alias: parameter }
 
 
-    shuwee_config:
+    shuwee_config.manager:
         class: Wanjee\Shuwee\ConfigBundle\Utils\ConfigManager
         arguments: [@doctrine.orm.entity_manager]
