@@ -9,3 +9,11 @@ services:
     shuwee_config.manager:
         class: Wanjee\Shuwee\ConfigBundle\Utils\ParameterManager
         arguments: [@doctrine.orm.entity_manager]
+
+    # Twig
+    shuwee_config.parameter_twig_extension:
+        class: Wanjee\Shuwee\ConfigBundle\Twig\ParameterExtension
+        arguments: [@shuwee_config.manager]
+        public: false
+        tags:
+            - { name: twig.extension }
