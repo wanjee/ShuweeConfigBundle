@@ -70,14 +70,6 @@ class ParameterAdmin extends Admin
     /**
      * @return string
      */
-    public function getEntityName()
-    {
-        return 'ShuweeConfigBundle:Parameter';
-    }
-
-    /**
-     * @return string
-     */
     public function getEntityClass()
     {
         return 'Wanjee\Shuwee\ConfigBundle\Entity\Parameter';
