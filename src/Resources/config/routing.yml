@@ -1,3 +1,5 @@
 shuwee_config_parameters:
     resource: "@ShuweeConfigBundle/Controller/ParameterController.php"
     type:     annotation
+
+    
