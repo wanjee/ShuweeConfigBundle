@@ -23,7 +23,7 @@ class ParameterAdmin extends Admin
     {
         // Return either a fully qualified class name
         // or the service id of your form if it is defined as a service
-        return 'Wanjee\Shuwee\ConfigBundle\Form\ParameterType';
+        return 'Wanjee\Shuwee\ConfigBundle\Form\Type\ParameterType';
     }
 
     /**

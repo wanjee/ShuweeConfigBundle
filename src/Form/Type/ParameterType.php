@@ -1,6 +1,6 @@
 <?php
 
-namespace Wanjee\Shuwee\ConfigBundle\Form;
+namespace Wanjee\Shuwee\ConfigBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
