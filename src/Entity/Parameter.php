@@ -3,6 +3,14 @@
 namespace Wanjee\Shuwee\ConfigBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -124,6 +132,44 @@ class Parameter implements \JsonSerializable
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeClass()
+    {
+        switch ($this->getType()) {
+            case 'integer':
+                $typeClass = IntegerType::class;
+                break;
+            case 'number':
+                $typeClass = NumberType::class;
+                break;
+            case 'date':
+                $typeClass = DateType::class;
+                break;
+            case 'datetime':
+                $typeClass = DateTimeType::class;
+                break;
+            case 'text':
+                $typeClass = TextType::class;
+                break;
+            case 'textarea':
+                $typeClass = TextareaType::class;
+                break;
+            case 'email':
+                $typeClass = EmailType::class;
+                break;
+            case 'url':
+                $typeClass = UrlType::class;
+                break;
+            default :
+                $typeClass = TextType::class;
+                break;
+        }
+
+        return $typeClass;
     }
 
     /**

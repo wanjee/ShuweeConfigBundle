@@ -77,7 +77,7 @@ class ParameterType extends AbstractType
             // get type and display according field element
             $form->add(
                 'clean_value',
-                $parameter->getType(),
+                $parameter->getTypeClass(),
                 array(
                     // display name as a label
                     'label' => $parameter->getName(),
