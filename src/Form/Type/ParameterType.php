@@ -3,10 +3,12 @@
 namespace Wanjee\Shuwee\ConfigBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class ParameterType
@@ -35,7 +37,7 @@ class ParameterType extends AbstractType
         if (!$parameter || null === $parameter->getId()) {
             $form->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'help' => 'Administrative name.  Only to help editor to complete variables.',
                 )
@@ -43,7 +45,7 @@ class ParameterType extends AbstractType
 
             $form->add(
                 'machineName',
-                'text',
+                TextType::class,
                 array(
                     'help' => 'Name to be used to retrieve the value using the REST API or the service.  Use a descriptive string like "site.title", "site.subtitle".  Should be as short as possible and must be unique.',
                 )
@@ -51,7 +53,7 @@ class ParameterType extends AbstractType
 
             $form->add(
                 'type',
-                'choice',
+                ChoiceType::class,
                 array(
                     'placeholder' => 'Choose a value type',
                     'choices' => array(
@@ -64,7 +66,9 @@ class ParameterType extends AbstractType
                         'email' => 'Email',
                         'url' => 'URL',
                     ),
-                    'help' => 'This cannot be changed afterwards.  If you need to change type you will have to delete and recreate the variable.'
+                    'help' => 'This cannot be changed afterwards.  If you need to change type you will have to delete and recreate the variable.',
+                    // Must be set to true in > 2.7.  See http://symfony.com/doc/current/reference/forms/types/choice.html#choices-as-values
+                    'choices_as_values' => true,
                 )
             );
         }
@@ -85,22 +89,14 @@ class ParameterType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Wanjee\Shuwee\ConfigBundle\Entity\Parameter',
             )
         );
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'shuwee_config_parameter';
     }
 }
