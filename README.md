@@ -1,9 +1,8 @@
 # ShuweeConfigBundle
 
-[![Latest Version](https://img.shields.io/github/release/wanjee/ShuweeConfigBundle.svg?style=flat-square)](https://github.com/wanjee/ShuweeConfigBundle/releases)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Total Downloads](https://img.shields.io/packagist/dt/wanjee/shuwee-config-bundle.svg?style=flat-square)](https://packagist.org/packages/wanjee/shuwee-config-bundle)
-
+[![Latest Stable Version](https://poser.pugx.org/wanjee/shuwee-config-bundle/v/stable)](https://packagist.org/packages/wanjee/shuwee-config-bundle)
+[![Total Downloads](https://poser.pugx.org/wanjee/shuwee-config-bundle/downloads)](https://packagist.org/packages/wanjee/shuwee-config-bundle)
+[![License](https://poser.pugx.org/wanjee/shuwee-config-bundle/license)](https://packagist.org/packages/wanjee/shuwee-config-bundle)
 
 ShuweeConfigBundle is part of Shuwee project.  It manage configuration & unique variables your frontend could need.
 As an example you will use this bundle to manage the title, description, meta of the site if the webmaster needs to be able to modify them.
