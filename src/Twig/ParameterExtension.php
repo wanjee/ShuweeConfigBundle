@@ -30,7 +30,7 @@ class ParameterExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'config_get_parameter' => new \Twig_Function_Method($this, 'getParameter'),
+            new \Twig_SimpleFunction('config_get_parameter', array($this, 'getParameter')),
         );
     }
 
