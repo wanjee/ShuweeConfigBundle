@@ -47,7 +47,7 @@ class ParameterType extends AbstractType
                 'machineName',
                 TextType::class,
                 array(
-                    'help' => 'Name to be used to retrieve the value using the REST API or the service.  Use a descriptive string like "site.title", "site.subtitle".  Should be as short as possible and must be unique.',
+                    'help' => 'Name to be used to retrieve the value using the REST API or the service.  Use a descriptive string like "site_title", "site_subtitle".  Should be as short as possible and must be unique.',
                 )
             );
 
@@ -57,14 +57,14 @@ class ParameterType extends AbstractType
                 array(
                     'placeholder' => 'Choose a value type',
                     'choices' => array(
-                        'text' => 'Text',
-                        'textarea' => 'Textarea',
-                        'integer' => 'Integer',
-                        'number' => 'Number',
-                        'date' => 'Date',
-                        'datetime' => 'Datetime',
-                        'email' => 'Email',
-                        'url' => 'URL',
+                        'Text' => 'text',
+                        'Textarea' => 'textarea',
+                        'Integer' => 'integer',
+                        'Number' => 'number',
+                        'Date' => 'date',
+                        'Datetime' => 'datetime',
+                        'Email' => 'email',
+                        'URL' => 'url',
                     ),
                     'help' => 'This cannot be changed afterwards.  If you need to change type you will have to delete and recreate the variable.',
                     // Must be set to true in > 2.7.  See http://symfony.com/doc/current/reference/forms/types/choice.html#choices-as-values
