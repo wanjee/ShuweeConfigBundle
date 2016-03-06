@@ -3,20 +3,10 @@
 
 ## Installation
 
-Add ShuweeConfigBundle in your *composer.json*
-
-``` .json
-{
-    "require": {
-        "wanjee/shuwee-config-bundle": "dev-master"
-    }
-}
-```
-
 Ask composer to install the bundle and its dependencies
 
 ``` bash
-composer update wanjee/shuwee-config-bundle
+composer require wanjee/shuwee-config-bundle
 ```
 
 Register required bundles in *AppKernel.php* :
@@ -75,4 +65,4 @@ shuwee_config:
 **/api/parameters** : Get the whole list of parameters
 **/api/parameters/{machineName}** : Get a single parameter by its machine_name
  
- 
+
